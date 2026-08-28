@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel 9 vs. Pixel 10 — Vergleich</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+  <style>
+    /* ───────────── Tokens ───────────── */
+    :root {
+      --bg: #F7F4ED;
+      --surface: #FFFFFF;
+      --surface-alt: #FAF7F0;
+      --ink: #1A1A1F;
+      --ink-soft: #6B6B73;
+      --ink-faint: #A8A8B0;
+      --border: #E5E0D5;
+      --border-soft: #EFEBE2;
+
+      --p10: #3D52F5;
+      --p10-soft: #E2E7FF;
+      --p10-tint: #F2F4FF;
+      --p10-ink: #FFFFFF;
+
+      --p9: #B8935E;
+      --p9-soft: #F2E8D5;
+      --p9-tint: #F9F2E4;
+      --p9-ink: #1A1A1F;
+
+      --accent: #E5A23A;
+      --accent-soft: #FBF0D9;
+
+      --radius-sm: 8px;
+      --radius: 14px;
+      --radius-lg: 22px;
+
+      --shadow-sm: 0 1px 2px rgba(20, 20, 30, 0.04);
+      --shadow: 0 4px 14px rgba(20, 20, 30, 0.06);
+      --shadow-lg: 0 18px 50px rgba(20, 20, 30, 0.10);
+
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0E0E12;
+        --surface: #181820;
+        --surface-alt: #1F1F28;
+        --ink: #F0EFE8;
+        --ink-soft: #8E8E96;
+        --ink-faint: #5A5A65;
+        --border: #2A2A35;
+        --border-soft: #232330;
+
+        --p10: #818CF8;
+        --p10-soft: #1F2150;
+        --p10-tint: #161834;
+        --p10-ink: #0E0E12;
+
+        --p9: #D4B894;
+        --p9-soft: #2E2A1F;
+        --p9-tint: #23201A;
+        --p9-ink: #0E0E12;
+
+        --accent: #F5B649;
+        --accent-soft: #2E2618;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0E0E12;
+      --surface: #181820;
+      --surface-alt: #1F1F28;
+      --ink: #F0EFE8;
+      --ink-soft: #8E8E96;
+      --ink-faint: #5A5A65;
+      --border: #2A2A35;
+      --border-soft: #232330;
+
+      --p10: #818CF8;
+      --p10-soft: #1F2150;
+      --p10-tint: #161834;
+      --p10-ink: #0E0E12;
+
+      --p9: #D4B894;
+      --p9-soft: #2E2A1F;
+      --p9-tint: #23201A;
+      --p9-ink: #0E0E12;
+
+      --accent: #F5B649;
+      --accent-soft: #2E2618;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ───────────── Reset ───────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    /* ───────────── Layout ───────────── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .eyebrow {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    /* ───────────── Theme toggle ───────────── */
+    .theme-toggle {
+      position: fixed; top: 20px; right: 20px;
+      display: inline-flex; align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px;
+      box-shadow: var(--shadow-sm);
+      z-index: 100;
+    }
+    .theme-toggle button {
+      width: 32px; height: 32px;
+      border-radius: 999px;
+      display: grid; place-items: center;
+      color: var(--ink-soft);
+      transition: background 0.2s, color 0.2s;
+    }
+    .theme-toggle button.active {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .theme-toggle svg { width: 16px; height: 16px; }
+    @media (max-width: 600px) { .theme-toggle { top: 12px; right: 12px; } }
+
+    /* ───────────── Hero ───────────── */
+    .hero { padding: 80px 0 56px; position: relative; }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 600px 300px at 20% 0%, var(--p10-tint), transparent 70%),
+        radial-gradient(ellipse 500px 300px at 80% 20%, var(--p9-tint), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero .eyebrow { margin-bottom: 18px; }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+      text-wrap: balance;
+      max-width: 14ch;
+    }
+    .hero h1 .vs {
+      display: inline-block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-faint);
+      margin: 0 0.1em;
+    }
+    .hero .lede {
+      margin-top: 24px;
+      font-size: clamp(17px, 1.4vw, 20px);
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 56ch;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 24px;
+      margin-top: 36px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+    .hero-meta span strong { color: var(--ink); font-weight: 500; }
+
+    /* ───────────── Phone Cards ───────────── */
+    .phones {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 48px 0 0;
+    }
+    @media (max-width: 700px) { .phones { grid-template-columns: 1fr; } }
+
+    .phone {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .phone:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .phone-tag {
+      position: absolute; top: 18px; right: 18px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      background: var(--surface-alt);
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      z-index: 2;
+    }
+    .phone.p10 .phone-tag { color: var(--p10); background: var(--p10-tint); border-color: var(--p10-soft); }
+    .phone.p9 .phone-tag { color: var(--p9); background: var(--p9-tint); border-color: var(--p9-soft); }
+
+    .phone-visual {
+      aspect-ratio: 4/3;
+      border-radius: var(--radius);
+      display: grid; place-items: center;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+    }
+    .phone-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: var(--radius);
+      background: var(--surface-alt);
+    }
+
+    .phone-name {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .phone-sub {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+    .phone-headline {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-soft);
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .phone-headline strong { color: var(--ink); font-weight: 600; }
+    .phone.p10 .phone-headline strong { color: var(--p10); }
+    .phone.p9 .phone-headline strong { color: var(--p9); }
+
+    /* ───────────── Verdict strip ───────────── */
+    .verdict-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: 64px 0 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    @media (max-width: 800px) { .verdict-strip { grid-template-columns: 1fr; } }
+    .vs-item {
+      padding: 28px;
+      border-right: 1px solid var(--border-soft);
+      position: relative;
+    }
+    .vs-item:last-child { border-right: none; }
+    @media (max-width: 800px) {
+      .vs-item { border-right: none; border-bottom: 1px solid var(--border-soft); }
+      .vs-item:last-child { border-bottom: none; }
+    }
+    .vs-item .label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+    }
+    .vs-item .value {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .vs-item .value .unit {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink-soft);
+      margin-left: 4px;
+    }
+    .vs-item .note {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .vs-item .bar {
+      margin-top: 16px;
+      height: 4px;
+      background: var(--surface-alt);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .vs-item .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--p10);
+    }
+    .vs-item.alt .bar > span { background: var(--p9); }
+    .vs-item.even .bar > span { background: var(--accent); }
+
+    /* ───────────── Section ───────────── */
+    .section { padding: 88px 0; }
+    .section-head { margin-bottom: 48px; max-width: 720px; }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+      letter-spacing: 0.1em;
+    }
+    .section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3.4vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      text-wrap: balance;
+    }
+    .section .lede {
+      margin-top: 14px;
+      font-size: 17px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* ───────────── Compare table ───────────── */
+    .compare-group { margin-top: 56px; }
+    .compare-group:first-child { margin-top: 0; }
+    .group-head {
+      display: flex; align-items: baseline; gap: 16px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .group-head .icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: grid; place-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      flex-shrink: 0;
+    }
+    .group-head h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .group-head .count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-soft);
+      margin-left: auto;
+      letter-spacing: 0.08em;
+    }
+
+    .compare {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      align-items: stretch;
+      border-bottom: 1px solid var(--border-soft);
+      transition: background 0.2s;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row:hover { background: var(--surface-alt); }
+
+    .compare-row .label {
+      padding: 20px 22px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid var(--border-soft);
+    }
+    .compare-row .label .l-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+    .compare-row .label .l-name { color: var(--ink); font-weight: 500; }
+
+    .compare-row .cell {
+      padding: 20px 22px;
+      font-size: 15px;
+      line-height: 1.45;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+    .compare-row .cell .num {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .compare-row .cell .text { font-weight: 500; }
+    .compare-row .cell .sub {
+      display: block;
+      font-size: 12px;
+      color: var(--ink-soft);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .compare-row .cell.p10 {
+      background: var(--p10-tint);
+      color: var(--ink);
+    }
+    .compare-row .cell.p10.win {
+      background: linear-gradient(135deg, var(--p10-tint) 0%, rgba(61, 82, 245, 0.04) 100%);
+    }
+    .compare-row .cell.p9.win {
+      background: linear-gradient(135deg, var(--p9-tint) 0%, rgba(184, 147, 94, 0.04) 100%);
+    }
+    .compare-row .cell.even { color: var(--ink-soft); }
+
+    .winner {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .winner.p10 { background: var(--p10); color: var(--p10-ink); }
+    .winner.p9 { background: var(--p9); color: var(--p9-ink); }
+    .winner.even {
+      background: var(--surface-alt);
+      color: var(--ink-soft);
+      border: 1px solid var(--border);
+    }
+    .winner svg { width: 11px; height: 11px; }
+
+    .compare-row .cell .winner { margin-left: auto; }
+
+    @media (max-width: 760px) {
+      .compare-row { grid-template-columns: 1fr; }
+      .compare-row .label {
+        border-right: none;
+        border-bottom: 1px dashed var(--border-soft);
+        background: var(--surface-alt);
+        padding: 14px 18px;
+      }
+      .compare-row .cell { padding: 14px 18px; }
+      .compare-row .cell.p10 { border-left: 3px solid var(--p10); }
+      .compare-row .cell.p9 { border-left: 3px solid var(--p9); }
+    }
+
+    /* ───────────── Visual bars ───────────── */
+    .bars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+    @media (max-width: 700px) { .bars { grid-template-columns: 1fr; } }
+
+    .bar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .bar-card .bc-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .bar-card .bc-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .bar-card .bc-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-soft);
+    }
+    .bar-row {
+      display: grid; grid-template-columns: 50px 1fr auto;
+      align-items: center; gap: 12px;
+      margin: 12px 0;
+    }
+    .bar-row .who {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .bar-row .who.p10 { color: var(--p10); }
+    .bar-row .who.p9 { color: var(--p9); }
+    .bar-row .track {
+      height: 10px;
+      background: var(--surface-alt);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+    }
+    .bar-row .fill {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1.2s cubic-bezier(.2,.7,.2,1);
+    }
+    .bar-row.p10 .fill { background: linear-gradient(90deg, var(--p10), #6B7DFF); }
+    .bar-row.p9 .fill { background: linear-gradient(90deg, #B8935E, #D8C29A); }
+    .bar-row .val {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      min-width: 64px;
+      text-align: right;
+    }
+
+    /* ───────────── Takeaway / Verdict ───────────── */
+    .takeaway {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+    .takeaway h3 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .takeaway .sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-soft);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 700px) { .takeaway-grid { grid-template-columns: 1fr; } }
+    .take-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .take-card .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .take-card.p10 .badge { background: var(--p10-tint); color: var(--p10); }
+    .take-card.p9 .badge { background: var(--p9-tint); color: var(--p9); }
+    .take-card.neutral .badge { background: var(--accent-soft); color: var(--accent); }
+    .take-card h4 {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .take-card p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* ───────────── Final Verdict panel ───────────── */
+    .verdict-panel {
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 800px) { .verdict-panel { grid-template-columns: 1fr; padding: 32px; } }
+    .verdict-panel .v-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 14px;
+    }
+    .verdict-panel h3 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--bg);
+    }
+    .verdict-panel p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-faint);
+    }
+    .verdict-panel .checklist {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .verdict-panel .checklist li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 12px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .verdict-panel .checklist li:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .verdict-panel .checklist .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .verdict-panel .checklist .dot.p10 { background: var(--p10); }
+    .verdict-panel .checklist .dot.p9 { background: var(--p9); }
+    .verdict-panel .checklist .dot.neutral { background: var(--ink-faint); }
+    .verdict-panel .checklist strong { font-weight: 600; }
+    .verdict-panel .checklist em { color: var(--ink-faint); font-style: normal; }
+
+    /* ───────────── Footer ───────────── */
+    footer {
+      padding: 56px 0 48px;
+      border-top: 1px solid var(--border);
+      margin-top: 80px;
+    }
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+    }
+    @media (max-width: 700px) { .foot-grid { grid-template-columns: 1fr; } }
+    .foot-grid p {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      max-width: 56ch;
+    }
+    .foot-sources {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: flex-end;
+    }
+    @media (max-width: 700px) { .foot-sources { justify-content: flex-start; } }
+    .foot-sources a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-soft);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .foot-sources a:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ───────────── Misc ───────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme toggle -->
+  <div class="theme-toggle" role="group" aria-label="Theme wählen">
+    <button id="t-light" aria-label="Hell" title="Hell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+    <button id="t-auto" aria-label="System" title="System" class="active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+    </button>
+    <button id="t-dark" aria-label="Dunkel" title="Dunkel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Smartphone · Vergleich · 2025/26</p>
+      <h1>Pixel 9 <span class="vs">vs.</span> Pixel 10</h1>
+      <p class="lede">
+        Ein Jahr Pixel-Evolution. Neuer Tensor-Chip auf 3-nm-Fertigung, endlich
+        Tele-Kamera auf der Basis, Qi2 mit Magneten. Was hat sich wirklich
+        verändert — und was ist nur Marketing?
+      </p>
+      <div class="hero-meta">
+        <span><strong>Stand</strong> &nbsp; August 2026</span>
+        <span><strong>Release P10</strong> &nbsp; 28.08.2025</span>
+        <span><strong>Startpreis</strong> &nbsp; $ 799 (beide)</span>
+        <span><strong>Specs verglichen</strong> &nbsp; 35 Punkte</span>
+      </div>
+
+      <!-- Phone identity cards -->
+      <div class="phones">
+        <!-- Pixel 10 -->
+        <article class="phone p10">
+          <span class="phone-tag">Neu · 2025</span>
+          <div class="phone-visual">
+            <img src="https://cdn.discordapp.com/attachments/1389687015003656346/1543014688034660422/pixel_10.png?ex=6a9353e9&is=6a920269&hm=3a5a2d4ae13abeb5d870939b4a730c809fa166fea804b5b4f614c43d9e6ce25a&" alt="Pixel 10" />
+          </div>
+          <div class="phone-name">Pixel 10</div>
+          <div class="phone-sub">Google · Tensor G5 · 12 GB · Indigo</div>
+          <p class="phone-headline">
+            <strong>Das Sprung-Update.</strong> Erstmals mit Tele, Qi2-Magneten
+            und dem auf TSMC gefertigten Tensor G5. On-Device-Gemini läuft jetzt
+            vollständig lokal.
+          </p>
+        </article>
+
+        <!-- Pixel 9 -->
+        <article class="phone p9">
+          <span class="phone-tag">Vorgänger · 2024</span>
+          <div class="phone-visual">
+            <img src="https://cdn.discordapp.com/attachments/1389687015003656346/1543014687606702160/pixel_9.png?ex=6a9353e9&is=6a920269&hm=c6f083e66e03acf6125fcc3b234f374336ae75dfc107944584019e88c4cc38b9&" alt="Pixel 9" />
+          </div>
+          <div class="phone-name">Pixel 9</div>
+          <div class="phone-sub">Google · Tensor G4 · 12 GB · Obsidian</div>
+          <p class="phone-headline">
+            <strong>Solide Basis.</strong> Besserer Ultraweitwinkel (48 MP),
+            Wi-Fi 7 und 6 g leichter. Reift mit Updates — bekommt noch alle
+            Pixel Drops bis 2031.
+          </p>
+        </article>
+      </div>
+
+      <!-- Verdict strip -->
+      <div class="verdict-strip">
+        <div class="vs-item">
+          <div class="label">Leistung · Geekbench Multi</div>
+          <div class="value">+28<span class="unit">%</span></div>
+          <div class="note">Pixel 10 durch Tensor G5</div>
+          <div class="bar"><span style="width: 96%"></span></div>
+        </div>
+        <div class="vs-item alt">
+          <div class="label">Akku</div>
+          <div class="value">+270<span class="unit">mAh</span></div>
+          <div class="note">4 970 vs. 4 700 mAh</div>
+          <div class="bar"><span style="width: 78%"></span></div>
+        </div>
+        <div class="vs-item even">
+          <div class="label">Display-Spitzenhelligkeit</div>
+          <div class="value">3 000<span class="unit">Nits</span></div>
+          <div class="note">+300 Nits vs. Pixel 9</div>
+          <div class="bar"><span style="width: 88%"></span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Vergleich -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-num">— Vergleich · 35 Punkte</p>
+        <h2>Was Pixel 10 kann, was Pixel 9 (noch) nicht kann</h2>
+        <p class="lede">
+          Geordnet nach Kategorie. Jede Zeile zeigt den Sieger — die farbige
+          Markierung rechts zeigt auf einen Blick, wer hier die Nase vorn hat.
+        </p>
+      </div>
+
+      <!-- Gruppe: Prozessor -->
+      <div class="compare-group">
+        <div class="group-head">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          </div>
+          <h3>Prozessor & Leistung</h3>
+          <span class="count">5 punkte</span>
+        </div>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">SoC</span><span class="l-name">Hauptprozessor</span></div>
+            <div class="cell p9"><span class="text">Tensor G4</span><span class="sub">4 nm · Samsung</span><span class="winner p9" title="Baseline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell p10 win"><span class="text">Tensor G5</span><span class="sub">3 nm · TSMC N3E</span><span class="winner p10" title="Besser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">CPU</span><span class="l-name">Geekbench 6 (Multi)</span></div>
+            <div class="cell p9"><span class="num">~4 573</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="num">~5 579</span><span class="sub">≈ 28 % schneller</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">TPU</span><span class="l-name">KI-Beschleuniger</span></div>
+            <div class="cell p9"><span class="text">Tensor G4 TPU</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="text">+60 % stärker</span><span class="sub">On-Device Gemini Nano</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Modem</span><span class="l-name">Mobilfunk-Chip</span></div>
+            <div class="cell p9"><span class="text">Exynos 5300</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="text">Exynos 5400</span><span class="sub">+ Satelliten-SOS</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Speicher</span><span class="l-name">RAM</span></div>
+            <div class="cell even"><span class="num">12 GB LPDDR5X</span><span class="winner even">=</span></div>
+            <div class="cell even"><span class="num">12 GB LPDDR5X</span><span class="winner even">=</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gruppe: Display -->
+      <div class="compare-group">
+        <div class="group-head">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3>Display</h3>
+          <span class="count">3 punkte</span>
+        </div>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Größe</span><span class="l-name">Diagonale</span></div>
+            <div class="cell even"><span class="num">6,3″ OLED</span><span class="winner even">=</span></div>
+            <div class="cell even"><span class="num">6,3″ OLED</span><span class="winner even">=</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Auflösung</span><span class="l-name">Pixel</span></div>
+            <div class="cell even"><span class="num">1 080 × 2 424</span><span class="sub">422 ppi</span><span class="winner even">=</span></div>
+            <div class="cell even"><span class="num">1 080 × 2 424</span><span class="sub">422 ppi</span><span class="winner even">=</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Helligkeit</span><span class="l-name">Peak</span></div>
+            <div class="cell p9"><span class="num">2 700 Nits</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="num">3 000 Nits</span><span class="sub">besser bei Sonne</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gruppe: Kamera -->
+      <div class="compare-group">
+        <div class="group-head">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+          <h3>Kamera-System</h3>
+          <span class="count">5 punkte</span>
+        </div>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Hauptkamera</span><span class="l-name">Weitwinkel</span></div>
+            <div class="cell p9 win"><span class="num">50 MP</span><span class="sub">f/1.7 · OIS</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell p10"><span class="num">48 MP</span><span class="sub">f/1.7 · OIS · Tensor-Verarbeitung</span><span class="winner p10"></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Ultraweitwinkel</span><span class="l-name">Makro & Landschaft</span></div>
+            <div class="cell p9 win"><span class="num">48 MP</span><span class="sub">f/1.7 · 125°</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell p10"><span class="num">13 MP</span><span class="sub">f/2.2 · 120°</span><span class="winner p10"></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Telephoto</span><span class="l-name">Optischer Zoom</span></div>
+            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
+            <div class="cell p10 win"><span class="num">10,8 MP · 5×</span><span class="sub">OIS · neu auf der Basis</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Frontkamera</span><span class="l-name">Selfie</span></div>
+            <div class="cell even"><span class="num">10,5 MP</span><span class="winner even">=</span></div>
+            <div class="cell even"><span class="num">10,5 MP</span><span class="winner even">=</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">KI-Features</span><span class="l-name">Camera Coach</span></div>
+            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
+            <div class="cell p10 win"><span class="text">Gemini-Fotoassistent</span><span class="sub">live Tipps</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gruppe: Akku & Laden -->
+      <div class="compare-group">
+        <div class="group-head">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2M6 11v2M10 11v2M14 11v2"/></svg>
+          </div>
+          <h3>Akku & Laden</h3>
+          <span class="count">4 punkte</span>
+        </div>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Kapazität</span><span class="l-name">Akku</span></div>
+            <div class="cell p9"><span class="num">4 700 mAh</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="num">4 970 mAh</span><span class="sub">+270 mAh · +6 %</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Laufzeit</span><span class="l-name">Hersteller-Angabe</span></div>
+            <div class="cell p9"><span class="text">bis 24 Std.</span><span class="sub">100 Std. mit Extreme Saver</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="text">bis 30+ Std.</span><span class="sub">100 Std. mit Extreme Saver</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Kabel</span><span class="l-name">Wired Charging</span></div>
+            <div class="cell p9"><span class="num">27 W</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="num">30 W</span><span class="sub">55 % in 30 min</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Kabellos</span><span class="l-name">Qi · Pixelsnap</span></div>
+            <div class="cell p9"><span class="num">15 W · Qi</span><span class="sub">ohne Magnete</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="num">15 W · Qi2</span><span class="sub">+ eingebaute Magnete</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gruppe: Software & KI -->
+      <div class="compare-group">
+        <div class="group-head">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          </div>
+          <h3>Software & KI</h3>
+          <span class="count">7 punkte</span>
+        </div>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">OS</span><span class="l-name">Beim Launch</span></div>
+            <div class="cell p9"><span class="text">Android 14</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="text">Android 16</span><span class="sub">Material 3 Expressive</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Updates</span><span class="l-name">Support bis · Restlaufzeit</span></div>
+            <div class="cell p9"><span class="text">bis August 2031</span><span class="sub">noch 5 Jahre (ab 08/2026)</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="text">bis August 2032</span><span class="sub">noch 6 Jahre (ab 08/2026)</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Gemini Nano</span><span class="l-name">On-Device</span></div>
+            <div class="cell even"><span class="text">eingeschränkt</span><span class="winner even">—</span></div>
+            <div class="cell p10 win"><span class="text">vollständig lokal</span><span class="sub">kein Cloud-Roundtrip</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Magic Cue</span><span class="l-name">Proaktive Vorschläge</span></div>
+            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
+            <div class="cell p10 win"><span class="text">in Messages & Phone</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Voice Translate</span><span class="l-name">Echtzeit-Telefon-Übersetzung</span></div>
+            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
+            <div class="cell p10 win"><span class="text">behält Stimmfarbe</span><span class="sub">on-device</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Satelliten-SOS</span><span class="l-name">Notruf ohne Netz</span></div>
+            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
+            <div class="cell p10 win"><span class="text">ja</span><span class="sub">über Exynos 5400</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Speicher</span><span class="l-name">Optionen</span></div>
+            <div class="cell even"><span class="num">128 · 256 GB</span><span class="sub">UFS 3.1</span><span class="winner even">—</span></div>
+            <div class="cell p10 win"><span class="num">128 · 256 GB</span><span class="sub">256 GB in UFS 4.0</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gruppe: Konnektivität & Bau -->
+      <div class="compare-group">
+        <div class="group-head">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12.55a11 11 0 0 1 14 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+          </div>
+          <h3>Konnektivität & Bau</h3>
+          <span class="count">6 punkte</span>
+        </div>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">WLAN</span><span class="l-name">Wi-Fi</span></div>
+            <div class="cell p9 win"><span class="num">Wi-Fi 7</span><span class="sub">Tri-Band</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell p10"><span class="num">Wi-Fi 6E</span><span class="sub">Dual-Band</span><span class="winner p10"></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Bluetooth</span><span class="l-name">Version</span></div>
+            <div class="cell p9"><span class="num">5.3</span><span class="winner p9"></span></div>
+            <div class="cell p10 win"><span class="num">6.0</span><span class="sub">LE Audio · Auracast</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">USB</span><span class="l-name">Anschluss</span></div>
+            <div class="cell even"><span class="num">USB-C 3.2</span><span class="winner even">=</span></div>
+            <div class="cell even"><span class="num">USB-C 3.2</span><span class="winner even">=</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Schutz</span><span class="l-name">Wasser & Staub</span></div>
+            <div class="cell even"><span class="num">IP68</span><span class="winner even">=</span></div>
+            <div class="cell even"><span class="num">IP68</span><span class="winner even">=</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Glas</span><span class="l-name">Vorder- & Rückseite</span></div>
+            <div class="cell even"><span class="text">Gorilla Glass Victus 2</span><span class="winner even">=</span></div>
+            <div class="cell even"><span class="text">Gorilla Glass Victus 2</span><span class="winner even">=</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Gewicht</span><span class="l-name">auf der Waage</span></div>
+            <div class="cell p9 win"><span class="num">198 g</span><span class="sub">— 6 g</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell p10"><span class="num">204 g</span><span class="winner p10"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gruppe: Farben -->
+      <div class="compare-group">
+        <div class="group-head">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          </div>
+          <h3>Farben</h3>
+          <span class="count">1 punkt</span>
+        </div>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="label"><span class="l-eyebrow">Palette</span><span class="l-name">Launch-Farben</span></div>
+            <div class="cell p9">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span style="width:24px; height:24px; border-radius:50%; background:#1A1A1F;"></span>
+                <span style="width:24px; height:24px; border-radius:50%; background:#E8DCC4;"></span>
+                <span style="width:24px; height:24px; border-radius:50%; background:#7B9B85;"></span>
+                <span style="width:24px; height:24px; border-radius:50%; background:#E8B0BC;"></span>
+              </div>
+              <span class="sub" style="margin-left:8px;">Obsidian · Porcelain · Wintergreen · Peony</span>
+              <span class="winner p9" style="margin-left:auto;"></span>
+            </div>
+            <div class="cell p10">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span style="width:24px; height:24px; border-radius:50%; background:#1A1A1F;"></span>
+                <span style="width:24px; height:24px; border-radius:50%; background:#D5DCE5;"></span>
+                <span style="width:24px; height:24px; border-radius:50%; background:#3D52F5;"></span>
+                <span style="width:24px; height:24px; border-radius:50%; background:#C4D26B;"></span>
+              </div>
+              <span class="sub" style="margin-left:8px;">Obsidian · Frost · Indigo · Lemongrass</span>
+              <span class="winner p10" style="margin-left:auto;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visueller Vergleich -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-num">— Im Verhältnis</p>
+        <h2>Wo der Abstand wirklich liegt</h2>
+        <p class="lede">
+          Vier Kennzahlen, an denen sich der Generationen-Sprung am deutlichsten
+          festmachen lässt. Balkenlänge = Pixel 10 in Prozent zu Pixel 9.
+        </p>
+      </div>
+
+      <div class="bars">
+        <div class="bar-card">
+          <div class="bc-head">
+            <span class="bc-title">CPU-Leistung (Geekbench 6 Multi)</span>
+            <span class="bc-sub">Punkte</span>
+          </div>
+          <div class="bar-row p9">
+            <span class="who p9">P9</span>
+            <span class="track"><span class="fill" data-w="82"></span></span>
+            <span class="val">4 573</span>
+          </div>
+          <div class="bar-row p10">
+            <span class="who p10">P10</span>
+            <span class="track"><span class="fill" data-w="100"></span></span>
+            <span class="val">5 579</span>
+          </div>
+        </div>
+
+        <div class="bar-card">
+          <div class="bc-head">
+            <span class="bc-title">Akku-Kapazität</span>
+            <span class="bc-sub">mAh</span>
+          </div>
+          <div class="bar-row p9">
+            <span class="who p9">P9</span>
+            <span class="track"><span class="fill" data-w="94"></span></span>
+            <span class="val">4 700</span>
+          </div>
+          <div class="bar-row p10">
+            <span class="who p10">P10</span>
+            <span class="track"><span class="fill" data-w="100"></span></span>
+            <span class="val">4 970</span>
+          </div>
+        </div>
+
+        <div class="bar-card">
+          <div class="bc-head">
+            <span class="bc-title">Display-Spitzenhelligkeit</span>
+            <span class="bc-sub">Nits</span>
+          </div>
+          <div class="bar-row p9">
+            <span class="who p9">P9</span>
+            <span class="track"><span class="fill" data-w="90"></span></span>
+            <span class="val">2 700</span>
+          </div>
+          <div class="bar-row p10">
+            <span class="who p10">P10</span>
+            <span class="track"><span class="fill" data-w="100"></span></span>
+            <span class="val">3 000</span>
+          </div>
+        </div>
+
+        <div class="bar-card">
+          <div class="bc-head">
+            <span class="bc-title">Kabel-Ladeleistung</span>
+            <span class="bc-sub">Watt</span>
+          </div>
+          <div class="bar-row p9">
+            <span class="who p9">P9</span>
+            <span class="track"><span class="fill" data-w="90"></span></span>
+            <span class="val">27 W</span>
+          </div>
+          <div class="bar-row p10">
+            <span class="who p10">P10</span>
+            <span class="track"><span class="fill" data-w="100"></span></span>
+            <span class="val">30 W</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Takeaway -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-num">— Einordnung</p>
+        <h2>Was das alles bedeutet</h2>
+      </div>
+
+      <div class="takeaway">
+        <h3>Wer gewinnt wo?</h3>
+        <p class="sub">Vier Karten, ein schnelles Bild</p>
+        <div class="takeaway-grid">
+          <div class="take-card p10">
+            <span class="badge">Pixel 10 · klar besser</span>
+            <h4>KI & Software-Stand</h4>
+            <p>Android 16, vollständig lokales Gemini Nano, Magic Cue, Voice Translate, Camera Coach. Wer KI-Features nutzt, bekommt hier das deutlich rundere Erlebnis.</p>
+          </div>
+          <div class="take-card p10">
+            <span class="badge">Pixel 10 · klar besser</span>
+            <h4>Telephoto & Magnete</h4>
+            <p>5× optischer Zoom auf der Basis war überfällig. Pixelsnap bringt MagSafe-Komfort endlich auch auf Android — Halterungen, Wallets, Ladegeräte.</p>
+          </div>
+          <div class="take-card p9">
+            <span class="badge">Pixel 9 · besser</span>
+            <h4>Ultraweitwinkel & Wi-Fi 7</h4>
+            <p>48 MP Ultraweitwinkel vs. 13 MP ist ein klarer Hardware-Vorteil. Dazu Wi-Fi 7 (Tri-Band) — zukunftssicherer als Wi-Fi 6E.</p>
+          </div>
+          <div class="take-card neutral">
+            <span class="badge">Geschmackssache</span>
+            <h4>Farben & Gewicht</h4>
+            <p>Pixel 9 ist 6 g leichter, Pixel 10 spielt kühler (Indigo) statt warm (Peony). Beides ist Argumentationssache — abhängig von Hand und Auge.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <p>
+          Stand August 2026. Daten aus offiziellen Spec-Sheets, Hersteller-
+          ankündigungen und unabhängigen Tests. Die Bewertung „besser“ ist
+          eine Einordnung — nicht jede Differenz ist im Alltag spürbar.
+        </p>
+        <div class="foot-sources">
+          <a href="https://www.theverge.com/tech/763600/google-pixel-9-vs-10-comparison-specs-price-features" target="_blank" rel="noopener">The Verge</a>
+          <a href="https://gsmarena.com/compare.php3?idPhone1=13219&idPhone2=13979" target="_blank" rel="noopener">GSMArena</a>
+          <a href="https://www.phonearena.com/phones/compare/Google-Pixel-9,Google-Pixel-10/phones/12284,12651" target="_blank" rel="noopener">PhoneArena</a>
+          <a href="https://www.techradar.com/phones/google-pixel-phones/google-pixel-10-vs-google-pixel-9-all-the-biggest-differences" target="_blank" rel="noopener">TechRadar</a>
+          <a href="https://blog.google/products-and-platforms/devices/pixel/google-pixel-10-pro-xl/" target="_blank" rel="noopener">Google Blog</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Theme toggle ─────────────────────
+    const root = document.documentElement;
+    const buttons = {
+      light: document.getElementById('t-light'),
+      auto: document.getElementById('t-auto'),
+      dark: document.getElementById('t-dark'),
+    };
+    function applyTheme(mode) {
+      if (mode === 'auto') {
+        root.removeAttribute('data-theme');
+      } else {
+        root.setAttribute('data-theme', mode);
+      }
+      Object.entries(buttons).forEach(([k, btn]) => {
+        btn.classList.toggle('active', k === mode);
+      });
+    }
+    Object.entries(buttons).forEach(([k, btn]) => {
+      btn.addEventListener('click', () => applyTheme(k));
+    });
+
+    // ── Animate bars on scroll ───────────
+    const fills = document.querySelectorAll('.fill');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.dataset.w + '%';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    fills.forEach(f => { f.style.width = '0%'; io.observe(f); });
+  </script>
+</body>
+</html>
