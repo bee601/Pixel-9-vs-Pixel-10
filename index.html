@@ -282,69 +282,51 @@
     .phone.p10 .phone-headline strong { color: var(--p10); }
     .phone.p9 .phone-headline strong { color: var(--p9); }
 
-    /* ───────────── Verdict strip ───────────── */
-    .verdict-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin: 64px 0 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
+    /* ── Preis-Block ── */
+    .phone-price {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 15px;
     }
-    @media (max-width: 800px) { .verdict-strip { grid-template-columns: 1fr; } }
-    .vs-item {
-      padding: 28px;
-      border-right: 1px solid var(--border-soft);
-      position: relative;
-    }
-    .vs-item:last-child { border-right: none; }
-    @media (max-width: 800px) {
-      .vs-item { border-right: none; border-bottom: 1px solid var(--border-soft); }
-      .vs-item:last-child { border-bottom: none; }
-    }
-    .vs-item .label {
+    .phone-price .price-label {
       font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.18em;
+      font-size: 11px;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
       color: var(--ink-soft);
-      margin-bottom: 14px;
     }
-    .vs-item .value {
+    .phone-price strong {
+      font-size: 20px;
+      font-weight: 700;
       font-family: var(--font-display);
-      font-size: 30px;
-      font-weight: 600;
       letter-spacing: -0.02em;
-      line-height: 1.05;
     }
-    .vs-item .value .unit {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--ink-soft);
-      margin-left: 4px;
-    }
-    .vs-item .note {
-      margin-top: 10px;
-      font-size: 13px;
-      color: var(--ink-soft);
-    }
-    .vs-item .bar {
-      margin-top: 16px;
-      height: 4px;
+    .phone.p10 .phone-price strong { color: var(--p10); }
+    .phone.p9 .phone-price strong { color: var(--p9); }
+    .phone-price .amazon-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
       background: var(--surface-alt);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
       border-radius: 999px;
-      overflow: hidden;
+      transition: all 0.2s;
+      margin-left: auto;
+      color: var(--ink-soft);
     }
-    .vs-item .bar > span {
-      display: block;
-      height: 100%;
-      border-radius: 999px;
-      background: var(--p10);
+    .phone-price .amazon-link:hover {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
     }
-    .vs-item.alt .bar > span { background: var(--p9); }
-    .vs-item.even .bar > span { background: var(--accent); }
+    @media (max-width: 700px) {
+      .phone-price .amazon-link { margin-left: 0; }
+    }
 
     /* ───────────── Section ───────────── */
     .section { padding: 88px 0; }
@@ -628,63 +610,6 @@
       line-height: 1.55;
     }
 
-    /* ───────────── Final Verdict panel ───────────── */
-    .verdict-panel {
-      background: var(--ink);
-      color: var(--bg);
-      border-radius: var(--radius-lg);
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    @media (max-width: 800px) { .verdict-panel { grid-template-columns: 1fr; padding: 32px; } }
-    .verdict-panel .v-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 14px;
-    }
-    .verdict-panel h3 {
-      font-family: var(--font-display);
-      font-size: clamp(28px, 3vw, 38px);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      color: var(--bg);
-    }
-    .verdict-panel p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--ink-faint);
-    }
-    .verdict-panel .checklist {
-      list-style: none;
-      margin-top: 8px;
-    }
-    .verdict-panel .checklist li {
-      display: flex; gap: 12px; align-items: flex-start;
-      padding: 12px 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      font-size: 14px;
-      color: var(--ink);
-    }
-    .verdict-panel .checklist li:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .verdict-panel .checklist .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      margin-top: 8px;
-      flex-shrink: 0;
-    }
-    .verdict-panel .checklist .dot.p10 { background: var(--p10); }
-    .verdict-panel .checklist .dot.p9 { background: var(--p9); }
-    .verdict-panel .checklist .dot.neutral { background: var(--ink-faint); }
-    .verdict-panel .checklist strong { font-weight: 600; }
-    .verdict-panel .checklist em { color: var(--ink-faint); font-style: normal; }
-
     /* ───────────── Footer ───────────── */
     footer {
       padding: 56px 0 48px;
@@ -777,6 +702,12 @@
             und dem auf TSMC gefertigten Tensor G5. On-Device-Gemini läuft jetzt
             vollständig lokal.
           </p>
+          <!-- Preis-Block: 128 GB + Amazon-Link, Preis auf 554 € korrigiert -->
+          <div class="phone-price">
+            <span class="price-label">128 GB · aktueller Preis</span>
+            <strong>554 €</strong>
+            <a href="https://www.amazon.de/Google-Pixel-Android-Smartphone-Dreifach-Rückkamera-Actua-Display/dp/B0FHJNDQBR" target="_blank" rel="noopener" class="amazon-link">Auf Amazon ansehen →</a>
+          </div>
         </article>
 
         <!-- Pixel 9 -->
@@ -792,34 +723,18 @@
             Wi-Fi 7 und 6 g leichter. Reift mit Updates — bekommt noch alle
             Pixel Drops bis 2031.
           </p>
+          <!-- Preis-Block: 128 GB + Amazon-Link -->
+          <div class="phone-price">
+            <span class="price-label">128 GB · aktueller Preis</span>
+            <strong>479 €</strong>
+            <a href="https://www.amazon.de/Google-Pixel-45-W-USB-C-Ladegerät-Android-Smartphone-Kamerafunktion/dp/B0FC2ND3GM" target="_blank" rel="noopener" class="amazon-link">Auf Amazon ansehen →</a>
+          </div>
         </article>
-      </div>
-
-      <!-- Verdict strip -->
-      <div class="verdict-strip">
-        <div class="vs-item">
-          <div class="label">Leistung · Geekbench Multi</div>
-          <div class="value">+28<span class="unit">%</span></div>
-          <div class="note">Pixel 10 durch Tensor G5</div>
-          <div class="bar"><span style="width: 96%"></span></div>
-        </div>
-        <div class="vs-item alt">
-          <div class="label">Akku</div>
-          <div class="value">+270<span class="unit">mAh</span></div>
-          <div class="note">4 970 vs. 4 700 mAh</div>
-          <div class="bar"><span style="width: 78%"></span></div>
-        </div>
-        <div class="vs-item even">
-          <div class="label">Display-Spitzenhelligkeit</div>
-          <div class="value">3 000<span class="unit">Nits</span></div>
-          <div class="note">+300 Nits vs. Pixel 9</div>
-          <div class="bar"><span style="width: 88%"></span></div>
-        </div>
       </div>
     </div>
   </header>
 
-  <!-- Vergleich -->
+  <!-- Vergleich – unverändert -->
   <section class="section">
     <div class="container">
       <div class="section-head">
