@@ -427,6 +427,7 @@
       align-items: center;
       gap: 10px;
       position: relative;
+      background: transparent !important; /* keine farbigen Hintergründe mehr */
     }
     .compare-row .cell .num {
       font-family: var(--font-mono);
@@ -443,36 +444,8 @@
       margin-top: 2px;
     }
 
-    .compare-row .cell.p10 {
-      background: var(--p10-tint);
-      color: var(--ink);
-    }
-    .compare-row .cell.p10.win {
-      background: linear-gradient(135deg, var(--p10-tint) 0%, rgba(61, 82, 245, 0.04) 100%);
-    }
-    .compare-row .cell.p9.win {
-      background: linear-gradient(135deg, var(--p9-tint) 0%, rgba(184, 147, 94, 0.04) 100%);
-    }
-    .compare-row .cell.even { color: var(--ink-soft); }
-
-    .winner {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 22px; height: 22px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-    .winner.p10 { background: var(--p10); color: var(--p10-ink); }
-    .winner.p9 { background: var(--p9); color: var(--p9-ink); }
-    .winner.even {
-      background: var(--surface-alt);
-      color: var(--ink-soft);
-      border: 1px solid var(--border);
-    }
-    .winner svg { width: 11px; height: 11px; }
-
-    .compare-row .cell .winner { margin-left: auto; }
+    /* Winner entfernt – keine Häkchen mehr */
+    .winner { display: none; }
 
     @media (max-width: 760px) {
       .compare-row { grid-template-columns: 1fr; }
@@ -483,9 +456,44 @@
         padding: 14px 18px;
       }
       .compare-row .cell { padding: 14px 18px; }
-      .compare-row .cell.p10 { border-left: 3px solid var(--p10); }
-      .compare-row .cell.p9 { border-left: 3px solid var(--p9); }
     }
+
+    /* ───────────── Info-Dropdown für jede Kategorie ───────────── */
+    .category-info {
+      margin-top: 12px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 0 16px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .category-info summary {
+      padding: 14px 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .category-info summary::-webkit-details-marker { display: none; }
+    .category-info summary::before {
+      content: "▶";
+      transition: transform 0.2s;
+      font-size: 10px;
+    }
+    .category-info[open] summary::before { transform: rotate(90deg); }
+    .category-info .info-content {
+      padding: 0 0 16px 0;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .category-info .info-content strong { color: var(--ink); }
 
     /* ───────────── Visual bars ───────────── */
     .bars {
@@ -693,7 +701,8 @@
         <article class="phone p10">
           <span class="phone-tag">Neu · 2025</span>
           <div class="phone-visual">
-            <img src="https://imgur.com/xNQa2J6" alt="Pixel 10" />
+            <!-- Direkter Imgur-Link: ID xNQa2J6 (PNG) -->
+            <img src="https://i.imgur.com/xNQa2J6.png" alt="Pixel 10" />
           </div>
           <div class="phone-name">Pixel 10</div>
           <div class="phone-sub">Google · Tensor G5 · 12 GB · Indigo</div>
@@ -702,7 +711,6 @@
             und dem auf TSMC gefertigten Tensor G5. On-Device-Gemini läuft jetzt
             vollständig lokal.
           </p>
-          <!-- Preis-Block: 128 GB + Amazon-Link, Preis auf 554 € korrigiert -->
           <div class="phone-price">
             <span class="price-label">128 GB · aktueller Preis</span>
             <strong>554 €</strong>
@@ -714,7 +722,7 @@
         <article class="phone p9">
           <span class="phone-tag">Vorgänger · 2024</span>
           <div class="phone-visual">
-            <img src="https://imgur.com/WGm2ahd" alt="Pixel 9" />
+            <img src="https://i.imgur.com/WGm2ahd.png" alt="Pixel 9" />
           </div>
           <div class="phone-name">Pixel 9</div>
           <div class="phone-sub">Google · Tensor G4 · 12 GB · Obsidian</div>
@@ -723,7 +731,6 @@
             Wi-Fi 7 und 6 g leichter. Reift mit Updates — bekommt noch alle
             Pixel Drops bis 2031.
           </p>
-          <!-- Preis-Block: 128 GB + Amazon-Link -->
           <div class="phone-price">
             <span class="price-label">128 GB · aktueller Preis</span>
             <strong>479 €</strong>
@@ -734,15 +741,15 @@
     </div>
   </header>
 
-  <!-- Vergleich – unverändert -->
+  <!-- Vergleich -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <p class="section-num">— Vergleich · 35 Punkte</p>
         <h2>Was Pixel 10 kann, was Pixel 9 (noch) nicht kann</h2>
         <p class="lede">
-          Geordnet nach Kategorie. Jede Zeile zeigt den Sieger — die farbige
-          Markierung rechts zeigt auf einen Blick, wer hier die Nase vorn hat.
+          Geordnet nach Kategorie. Klicke auf das Info‑Symbol, um Hintergrundwissen
+          zu jedem Bereich zu erhalten.
         </p>
       </div>
 
@@ -758,30 +765,37 @@
         <div class="compare">
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">SoC</span><span class="l-name">Hauptprozessor</span></div>
-            <div class="cell p9"><span class="text">Tensor G4</span><span class="sub">4 nm · Samsung</span><span class="winner p9" title="Baseline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-            <div class="cell p10 win"><span class="text">Tensor G5</span><span class="sub">3 nm · TSMC N3E</span><span class="winner p10" title="Besser"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text">Tensor G4</span><span class="sub">4 nm · Samsung</span></div>
+            <div class="cell"><span class="text">Tensor G5</span><span class="sub">3 nm · TSMC N3E</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">CPU</span><span class="l-name">Geekbench 6 (Multi)</span></div>
-            <div class="cell p9"><span class="num">~4 573</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="num">~5 579</span><span class="sub">≈ 28 % schneller</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="num">~4 573</span></div>
+            <div class="cell"><span class="num">~5 579</span><span class="sub">≈ 28 % schneller</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">TPU</span><span class="l-name">KI-Beschleuniger</span></div>
-            <div class="cell p9"><span class="text">Tensor G4 TPU</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="text">+60 % stärker</span><span class="sub">On-Device Gemini Nano</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text">Tensor G4 TPU</span></div>
+            <div class="cell"><span class="text">+60 % stärker</span><span class="sub">On-Device Gemini Nano</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Modem</span><span class="l-name">Mobilfunk-Chip</span></div>
-            <div class="cell p9"><span class="text">Exynos 5300</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="text">Exynos 5400</span><span class="sub">+ Satelliten-SOS</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text">Exynos 5300</span></div>
+            <div class="cell"><span class="text">Exynos 5400</span><span class="sub">+ Satelliten-SOS</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Speicher</span><span class="l-name">RAM</span></div>
-            <div class="cell even"><span class="num">12 GB LPDDR5X</span><span class="winner even">=</span></div>
-            <div class="cell even"><span class="num">12 GB LPDDR5X</span><span class="winner even">=</span></div>
+            <div class="cell"><span class="num">12 GB LPDDR5X</span></div>
+            <div class="cell"><span class="num">12 GB LPDDR5X</span></div>
           </div>
         </div>
+        <!-- Info-Dropdown -->
+        <details class="category-info">
+          <summary>ℹ️ Mehr zur Prozessor‑Kategorie</summary>
+          <div class="info-content">
+            <p><strong>Tensor G5</strong> setzt auf die 3‑nm‑Fertigung von TSMC, was höhere Effizienz und bessere Kühlung ermöglicht. Die TPU wurde deutlich verbessert, sodass KI‑Modelle wie Gemini Nano vollständig lokal laufen – ohne Cloud‑Roundtrip. Das Modem unterstützt jetzt Satelliten‑SOS, ein Feature, das beim Pixel 9 noch fehlt.</p>
+          </div>
+        </details>
       </div>
 
       <!-- Gruppe: Display -->
@@ -796,20 +810,26 @@
         <div class="compare">
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Größe</span><span class="l-name">Diagonale</span></div>
-            <div class="cell even"><span class="num">6,3″ OLED</span><span class="winner even">=</span></div>
-            <div class="cell even"><span class="num">6,3″ OLED</span><span class="winner even">=</span></div>
+            <div class="cell"><span class="num">6,3″ OLED</span></div>
+            <div class="cell"><span class="num">6,3″ OLED</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Auflösung</span><span class="l-name">Pixel</span></div>
-            <div class="cell even"><span class="num">1 080 × 2 424</span><span class="sub">422 ppi</span><span class="winner even">=</span></div>
-            <div class="cell even"><span class="num">1 080 × 2 424</span><span class="sub">422 ppi</span><span class="winner even">=</span></div>
+            <div class="cell"><span class="num">1 080 × 2 424</span><span class="sub">422 ppi</span></div>
+            <div class="cell"><span class="num">1 080 × 2 424</span><span class="sub">422 ppi</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Helligkeit</span><span class="l-name">Peak</span></div>
-            <div class="cell p9"><span class="num">2 700 Nits</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="num">3 000 Nits</span><span class="sub">besser bei Sonne</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="num">2 700 Nits</span></div>
+            <div class="cell"><span class="num">3 000 Nits</span><span class="sub">besser bei Sonne</span></div>
           </div>
         </div>
+        <details class="category-info">
+          <summary>ℹ️ Mehr zur Display‑Kategorie</summary>
+          <div class="info-content">
+            <p>Beide Modelle nutzen ein 6,3‑Zoll‑OLED‑Panel mit gleicher Auflösung. Der Unterschied liegt in der Spitzenhelligkeit: <strong>3 000 Nits</strong> beim Pixel 10 gegenüber 2 700 Nits beim Pixel 9 – das verbessert die Lesbarkeit bei direktem Sonnenlicht deutlich.</p>
+          </div>
+        </details>
       </div>
 
       <!-- Gruppe: Kamera -->
@@ -824,30 +844,36 @@
         <div class="compare">
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Hauptkamera</span><span class="l-name">Weitwinkel</span></div>
-            <div class="cell p9 win"><span class="num">50 MP</span><span class="sub">f/1.7 · OIS</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-            <div class="cell p10"><span class="num">48 MP</span><span class="sub">f/1.7 · OIS · Tensor-Verarbeitung</span><span class="winner p10"></span></div>
+            <div class="cell"><span class="num">50 MP</span><span class="sub">f/1.7 · OIS</span></div>
+            <div class="cell"><span class="num">48 MP</span><span class="sub">f/1.7 · OIS · Tensor-Verarbeitung</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Ultraweitwinkel</span><span class="l-name">Makro & Landschaft</span></div>
-            <div class="cell p9 win"><span class="num">48 MP</span><span class="sub">f/1.7 · 125°</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-            <div class="cell p10"><span class="num">13 MP</span><span class="sub">f/2.2 · 120°</span><span class="winner p10"></span></div>
+            <div class="cell"><span class="num">48 MP</span><span class="sub">f/1.7 · 125°</span></div>
+            <div class="cell"><span class="num">13 MP</span><span class="sub">f/2.2 · 120°</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Telephoto</span><span class="l-name">Optischer Zoom</span></div>
-            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
-            <div class="cell p10 win"><span class="num">10,8 MP · 5×</span><span class="sub">OIS · neu auf der Basis</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span></div>
+            <div class="cell"><span class="num">10,8 MP · 5×</span><span class="sub">OIS · neu auf der Basis</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Frontkamera</span><span class="l-name">Selfie</span></div>
-            <div class="cell even"><span class="num">10,5 MP</span><span class="winner even">=</span></div>
-            <div class="cell even"><span class="num">10,5 MP</span><span class="winner even">=</span></div>
+            <div class="cell"><span class="num">10,5 MP</span></div>
+            <div class="cell"><span class="num">10,5 MP</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">KI-Features</span><span class="l-name">Camera Coach</span></div>
-            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
-            <div class="cell p10 win"><span class="text">Gemini-Fotoassistent</span><span class="sub">live Tipps</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span></div>
+            <div class="cell"><span class="text">Gemini-Fotoassistent</span><span class="sub">live Tipps</span></div>
           </div>
         </div>
+        <details class="category-info">
+          <summary>ℹ️ Mehr zur Kamera‑Kategorie</summary>
+          <div class="info-content">
+            <p>Der grösste Unterschied: <strong>Pixel 10</strong> bringt ein dediziertes Teleobjektiv mit 5‑fach optischem Zoom – ein Feature, das bei der Basisversion des Pixel 9 komplett fehlt. Dafür hat das Pixel 9 einen deutlich hochauflösenderen Ultraweitwinkel (48 MP vs. 13 MP). Die Entscheidung hängt davon ab, ob du lieber weitwinklige Landschaften oder Zoomschüsse machst.</p>
+          </div>
+        </details>
       </div>
 
       <!-- Gruppe: Akku & Laden -->
@@ -862,25 +888,31 @@
         <div class="compare">
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Kapazität</span><span class="l-name">Akku</span></div>
-            <div class="cell p9"><span class="num">4 700 mAh</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="num">4 970 mAh</span><span class="sub">+270 mAh · +6 %</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="num">4 700 mAh</span></div>
+            <div class="cell"><span class="num">4 970 mAh</span><span class="sub">+270 mAh · +6 %</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Laufzeit</span><span class="l-name">Hersteller-Angabe</span></div>
-            <div class="cell p9"><span class="text">bis 24 Std.</span><span class="sub">100 Std. mit Extreme Saver</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="text">bis 30+ Std.</span><span class="sub">100 Std. mit Extreme Saver</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text">bis 24 Std.</span><span class="sub">100 Std. mit Extreme Saver</span></div>
+            <div class="cell"><span class="text">bis 30+ Std.</span><span class="sub">100 Std. mit Extreme Saver</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Kabel</span><span class="l-name">Wired Charging</span></div>
-            <div class="cell p9"><span class="num">27 W</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="num">30 W</span><span class="sub">55 % in 30 min</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="num">27 W</span></div>
+            <div class="cell"><span class="num">30 W</span><span class="sub">55 % in 30 min</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Kabellos</span><span class="l-name">Qi · Pixelsnap</span></div>
-            <div class="cell p9"><span class="num">15 W · Qi</span><span class="sub">ohne Magnete</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="num">15 W · Qi2</span><span class="sub">+ eingebaute Magnete</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="num">15 W · Qi</span><span class="sub">ohne Magnete</span></div>
+            <div class="cell"><span class="num">15 W · Qi2</span><span class="sub">+ eingebaute Magnete</span></div>
           </div>
         </div>
+        <details class="category-info">
+          <summary>ℹ️ Mehr zur Akku‑Kategorie</summary>
+          <div class="info-content">
+            <p>Der Akku des Pixel 10 ist um 270 mAh grösser und lädt kabelgebunden mit 30 W (3 W mehr als beim Pixel 9). Der wichtigste Pluspunkt: <strong>Qi2</strong> bringt integrierte Magnete – das ermöglicht die Nutzung von MagSafe‑Zubehör, ohne eine zusätzliche Hülle zu benötigen.</p>
+          </div>
+        </details>
       </div>
 
       <!-- Gruppe: Software & KI -->
@@ -895,40 +927,46 @@
         <div class="compare">
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">OS</span><span class="l-name">Beim Launch</span></div>
-            <div class="cell p9"><span class="text">Android 14</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="text">Android 16</span><span class="sub">Material 3 Expressive</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text">Android 14</span></div>
+            <div class="cell"><span class="text">Android 16</span><span class="sub">Material 3 Expressive</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Updates</span><span class="l-name">Support bis · Restlaufzeit</span></div>
-            <div class="cell p9"><span class="text">bis August 2031</span><span class="sub">noch 5 Jahre (ab 08/2026)</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="text">bis August 2032</span><span class="sub">noch 6 Jahre (ab 08/2026)</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text">bis August 2031</span><span class="sub">noch 5 Jahre (ab 08/2026)</span></div>
+            <div class="cell"><span class="text">bis August 2032</span><span class="sub">noch 6 Jahre (ab 08/2026)</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Gemini Nano</span><span class="l-name">On-Device</span></div>
-            <div class="cell even"><span class="text">eingeschränkt</span><span class="winner even">—</span></div>
-            <div class="cell p10 win"><span class="text">vollständig lokal</span><span class="sub">kein Cloud-Roundtrip</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text">eingeschränkt</span></div>
+            <div class="cell"><span class="text">vollständig lokal</span><span class="sub">kein Cloud-Roundtrip</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Magic Cue</span><span class="l-name">Proaktive Vorschläge</span></div>
-            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
-            <div class="cell p10 win"><span class="text">in Messages & Phone</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span></div>
+            <div class="cell"><span class="text">in Messages & Phone</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Voice Translate</span><span class="l-name">Echtzeit-Telefon-Übersetzung</span></div>
-            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
-            <div class="cell p10 win"><span class="text">behält Stimmfarbe</span><span class="sub">on-device</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span></div>
+            <div class="cell"><span class="text">behält Stimmfarbe</span><span class="sub">on-device</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Satelliten-SOS</span><span class="l-name">Notruf ohne Netz</span></div>
-            <div class="cell even"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span><span class="winner even">—</span></div>
-            <div class="cell p10 win"><span class="text">ja</span><span class="sub">über Exynos 5400</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="text" style="color:var(--ink-faint)">nicht vorhanden</span></div>
+            <div class="cell"><span class="text">ja</span><span class="sub">über Exynos 5400</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Speicher</span><span class="l-name">Optionen</span></div>
-            <div class="cell even"><span class="num">128 · 256 GB</span><span class="sub">UFS 3.1</span><span class="winner even">—</span></div>
-            <div class="cell p10 win"><span class="num">128 · 256 GB</span><span class="sub">256 GB in UFS 4.0</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="num">128 · 256 GB</span><span class="sub">UFS 3.1</span></div>
+            <div class="cell"><span class="num">128 · 256 GB</span><span class="sub">256 GB in UFS 4.0</span></div>
           </div>
         </div>
+        <details class="category-info">
+          <summary>ℹ️ Mehr zur Software‑Kategorie</summary>
+          <div class="info-content">
+            <p>Das Pixel 10 startet mit <strong>Android 16</strong> und bietet ein Jahr längeren Update‑Support (bis 2032). Die entscheidenden KI‑Neuerungen sind vollständig on‑device: Gemini Nano, Magic Cue und Voice Translate laufen ohne Cloud – das erhöht Datenschutz und Geschwindigkeit. Satelliten‑SOS ist ein Sicherheitsfeature, das beim Pixel 9 (Basismodell) fehlt.</p>
+          </div>
+        </details>
       </div>
 
       <!-- Gruppe: Konnektivität & Bau -->
@@ -943,35 +981,41 @@
         <div class="compare">
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">WLAN</span><span class="l-name">Wi-Fi</span></div>
-            <div class="cell p9 win"><span class="num">Wi-Fi 7</span><span class="sub">Tri-Band</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-            <div class="cell p10"><span class="num">Wi-Fi 6E</span><span class="sub">Dual-Band</span><span class="winner p10"></span></div>
+            <div class="cell"><span class="num">Wi-Fi 7</span><span class="sub">Tri-Band</span></div>
+            <div class="cell"><span class="num">Wi-Fi 6E</span><span class="sub">Dual-Band</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Bluetooth</span><span class="l-name">Version</span></div>
-            <div class="cell p9"><span class="num">5.3</span><span class="winner p9"></span></div>
-            <div class="cell p10 win"><span class="num">6.0</span><span class="sub">LE Audio · Auracast</span><span class="winner p10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="cell"><span class="num">5.3</span></div>
+            <div class="cell"><span class="num">6.0</span><span class="sub">LE Audio · Auracast</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">USB</span><span class="l-name">Anschluss</span></div>
-            <div class="cell even"><span class="num">USB-C 3.2</span><span class="winner even">=</span></div>
-            <div class="cell even"><span class="num">USB-C 3.2</span><span class="winner even">=</span></div>
+            <div class="cell"><span class="num">USB-C 3.2</span></div>
+            <div class="cell"><span class="num">USB-C 3.2</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Schutz</span><span class="l-name">Wasser & Staub</span></div>
-            <div class="cell even"><span class="num">IP68</span><span class="winner even">=</span></div>
-            <div class="cell even"><span class="num">IP68</span><span class="winner even">=</span></div>
+            <div class="cell"><span class="num">IP68</span></div>
+            <div class="cell"><span class="num">IP68</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Glas</span><span class="l-name">Vorder- & Rückseite</span></div>
-            <div class="cell even"><span class="text">Gorilla Glass Victus 2</span><span class="winner even">=</span></div>
-            <div class="cell even"><span class="text">Gorilla Glass Victus 2</span><span class="winner even">=</span></div>
+            <div class="cell"><span class="text">Gorilla Glass Victus 2</span></div>
+            <div class="cell"><span class="text">Gorilla Glass Victus 2</span></div>
           </div>
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Gewicht</span><span class="l-name">auf der Waage</span></div>
-            <div class="cell p9 win"><span class="num">198 g</span><span class="sub">— 6 g</span><span class="winner p9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-            <div class="cell p10"><span class="num">204 g</span><span class="winner p10"></span></div>
+            <div class="cell"><span class="num">198 g</span><span class="sub">— 6 g</span></div>
+            <div class="cell"><span class="num">204 g</span></div>
           </div>
         </div>
+        <details class="category-info">
+          <summary>ℹ️ Mehr zur Konnektivität</summary>
+          <div class="info-content">
+            <p>Das Pixel 9 hat noch <strong>Wi‑Fi 7</strong>, während das Pixel 10 auf Wi‑Fi 6E setzt – das ist ein Rück­schritt, aber für die meisten Nutzer im Alltag kaum spürbar. Dafür hat das Pixel 10 <strong>Bluetooth 6.0</strong> (gegenüber 5.3), was bessere Audio‑Qualität und neue Funktionen wie Auracast ermöglicht. Beide sind IP68‑zertifiziert und nutzen das gleiche Glas.</p>
+          </div>
+        </details>
       </div>
 
       <!-- Gruppe: Farben -->
@@ -986,7 +1030,7 @@
         <div class="compare">
           <div class="compare-row">
             <div class="label"><span class="l-eyebrow">Palette</span><span class="l-name">Launch-Farben</span></div>
-            <div class="cell p9">
+            <div class="cell">
               <div style="display:flex; gap:6px; flex-wrap:wrap;">
                 <span style="width:24px; height:24px; border-radius:50%; background:#1A1A1F;"></span>
                 <span style="width:24px; height:24px; border-radius:50%; background:#E8DCC4;"></span>
@@ -994,9 +1038,8 @@
                 <span style="width:24px; height:24px; border-radius:50%; background:#E8B0BC;"></span>
               </div>
               <span class="sub" style="margin-left:8px;">Obsidian · Porcelain · Wintergreen · Peony</span>
-              <span class="winner p9" style="margin-left:auto;"></span>
             </div>
-            <div class="cell p10">
+            <div class="cell">
               <div style="display:flex; gap:6px; flex-wrap:wrap;">
                 <span style="width:24px; height:24px; border-radius:50%; background:#1A1A1F;"></span>
                 <span style="width:24px; height:24px; border-radius:50%; background:#D5DCE5;"></span>
@@ -1004,11 +1047,17 @@
                 <span style="width:24px; height:24px; border-radius:50%; background:#C4D26B;"></span>
               </div>
               <span class="sub" style="margin-left:8px;">Obsidian · Frost · Indigo · Lemongrass</span>
-              <span class="winner p10" style="margin-left:auto;"></span>
             </div>
           </div>
         </div>
+        <details class="category-info">
+          <summary>ℹ️ Mehr zu den Farben</summary>
+          <div class="info-content">
+            <p>Beide Modelle teilen sich die Farbe <strong>Obsidian</strong>. Das Pixel 9 bietet zusätzlich warme Töne (Porcelain, Peony) und ein gedecktes Grün (Wintergreen). Das Pixel 10 setzt auf kühle Akzente mit Frost, Indigo und Lemongrass – eine Frage des persönlichen Geschmacks.</p>
+          </div>
+        </details>
       </div>
+
     </div>
   </section>
 
